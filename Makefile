@@ -2,10 +2,10 @@
 # FastAPI Test App - Makefile
 # ============================================
 
-# Configuration
-REGISTRY_HOST = registry.prompt-engineer.su
-REGISTRY_USER = admin
-REGISTRY_PASSWORD = admin123
+# Configuration (ЗАМЕНИТЕ НА СВОИ ДАННЫЕ!)
+REGISTRY_HOST = registry.your-domain.com
+REGISTRY_USER = your-username
+REGISTRY_PASSWORD = your-password
 IMAGE_NAME = fastapi-test-app
 APP_VERSION = 1.0.1
 
@@ -41,8 +41,11 @@ help: ## Show this help message
 	@echo ""
 	@echo "Configuration:"
 	@echo "  REGISTRY_HOST    = $(REGISTRY_HOST)"
+	@echo "  REGISTRY_USER     = $(REGISTRY_USER)"
 	@echo "  IMAGE_NAME       = $(IMAGE_NAME)"
 	@echo "  APP_VERSION      = $(APP_VERSION)"
+	@echo ""
+	@echo "⚠️  ВАЖНО: Замените шаблонные значения на свои!"
 	@echo ""
 
 login: ## Login to Docker Registry

@@ -45,9 +45,20 @@ Thumbs.db
 # Logs
 *.log
 
-# Environment variables
+# Environment variables (ВАЖНО!)
 .env
 .env.*
+.env.local
+.env.production
+.env.staging
+
+# Security - никогда не коммитьте реальные данные!
+config.local
+secrets.json
+credentials.json
+*.key
+*.pem
+*.crt
 
 # Temporary files
 *.tmp
