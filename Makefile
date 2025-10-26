@@ -9,6 +9,10 @@ REGISTRY_PASSWORD = your-password
 IMAGE_NAME = fastapi-test-app
 APP_VERSION = 1.0.1
 
+# Docker Hub настройки
+DOCKERHUB_USER = your-dockerhub-username
+DOCKERHUB_IMAGE = fastapi-test-app
+
 # Colors for output (disabled for Windows compatibility)
 RED = 
 GREEN = 
@@ -38,6 +42,11 @@ help: ## Show this help message
 	@echo "  make run    - Run application locally"
 	@echo "  make stop   - Stop local container"
 	@echo "  make clean  - Clean up unused images"
+	@echo ""
+	@echo "Docker Hub commands:"
+	@echo "  make hub-login - Login to Docker Hub"
+	@echo "  make hub-push  - Push image to Docker Hub"
+	@echo "  make hub-deploy - Build and push to Docker Hub"
 	@echo ""
 	@echo "Configuration:"
 	@echo "  REGISTRY_HOST    = $(REGISTRY_HOST)"
@@ -170,3 +179,37 @@ check-deploy: ## Check deployment status on server
 
 server-shell: ## Open shell on server
 	@ssh vps-prompt
+
+# ============================================
+# Docker Hub commands
+# ============================================
+
+hub-login: ## Login to Docker Hub
+	@echo "$(BLUE)🔐 Logging in to Docker Hub...$(NC)"
+	@docker login -u $(DOCKERHUB_USER)
+	@echo "$(GREEN)✅ Docker Hub login successful!$(NC)"
+
+hub-push: hub-login ## Push image to Docker Hub
+	@echo "$(BLUE)📤 Pushing image to Docker Hub...$(NC)"
+	@docker tag $(IMAGE_NAME):latest $(DOCKERHUB_USER)/$(DOCKERHUB_IMAGE):latest
+	@docker tag $(IMAGE_NAME):latest $(DOCKERHUB_USER)/$(DOCKERHUB_IMAGE):$(APP_VERSION)
+	@docker push $(DOCKERHUB_USER)/$(DOCKERHUB_IMAGE):latest
+	@docker push $(DOCKERHUB_USER)/$(DOCKERHUB_IMAGE):$(APP_VERSION)
+	@echo "$(GREEN)✅ Image pushed to Docker Hub successfully!$(NC)"
+	@echo ""
+	@echo "$(GREEN)Image available at:$(NC)"
+	@echo "  https://hub.docker.com/r/$(DOCKERHUB_USER)/$(DOCKERHUB_IMAGE)"
+	@echo ""
+
+hub-deploy: build hub-push ## Build and push to Docker Hub
+	@echo ""
+	@echo "$(GREEN)🚀 Docker Hub deployment completed!$(NC)"
+	@echo "$(YELLOW)📦 Image published to: https://hub.docker.com/r/$(DOCKERHUB_USER)/$(DOCKERHUB_IMAGE)$(NC)"
+	@echo ""
+
+hub-info: ## Show Docker Hub information
+	@echo "$(GREEN)Docker Hub Repository:$(NC)"
+	@echo "  https://hub.docker.com/r/$(DOCKERHUB_USER)/$(DOCKERHUB_IMAGE)"
+	@echo ""
+	@echo "$(GREEN)Available tags:$(NC)"
+	@echo "  latest, $(APP_VERSION)"
