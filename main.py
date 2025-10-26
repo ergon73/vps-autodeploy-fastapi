@@ -26,7 +26,7 @@ async def root():
     """Root endpoint - welcome message"""
     return {
         "message": "🚀 Добро пожаловать в FastAPI с Let's Encrypt!",
-        "domain": "prompt-engineer.su",
+        "domain": "your-domain.com",
         "ssl": "Let's Encrypt",
         "status": "production",
         "timestamp": datetime.now().isoformat()
@@ -48,7 +48,7 @@ async def info():
     return {
         "app_name": "FastAPI Test App",
         "version": "1.0.0",
-        "domain": "app.prompt-engineer.su",
+        "domain": "app.your-domain.com",
         "ssl_provider": "Let's Encrypt",
         "auto_deploy": "Watchtower",
         "reverse_proxy": "Traefik",

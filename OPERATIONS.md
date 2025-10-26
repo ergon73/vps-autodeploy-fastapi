@@ -26,10 +26,10 @@ certbot certificates
 ### Проверка работы
 ```bash
 # Registry
-curl -u admin:admin123 https://registry.prompt-engineer.su/v2/_catalog
+curl -u your-username:your-password https://registry.your-domain.com/v2/_catalog
 
 # FastAPI Application
-curl -k https://app.prompt-engineer.su
+curl -k https://app.your-domain.com
 
 # Проверка Watchtower
 docker logs watchtower --tail 10
@@ -77,13 +77,13 @@ tar -czf config-backup-$(date +%Y%m%d).tar.gz \
 **Решение:**
 ```bash
 # Проверить DNS
-nslookup registry.prompt-engineer.su
+nslookup registry.your-domain.com
 
 # Проверить порты
 ufw status
 
 # Попробовать снова
-certbot certonly --standalone -d registry.prompt-engineer.su --force-renewal
+certbot certonly --standalone -d registry.your-domain.com --force-renewal
 ```
 
 ### Проблема: Traefik не стартует
@@ -133,24 +133,24 @@ curl -v http://localhost:5000/v2/
 ### Проверка DNS
 ```bash
 # Локально
-nslookup registry.prompt-engineer.su
-nslookup app.prompt-engineer.su
+nslookup registry.your-domain.com
+nslookup app.your-domain.com
 
 # Или через dig
-dig registry.prompt-engineer.su +short
-dig app.prompt-engineer.su +short
+dig registry.your-domain.com +short
+dig app.your-domain.com +short
 
-# Должны вернуть: 95.163.232.237
+# Должны вернуть: YOUR_SERVER_IP
 ```
 
 ### Тест SSL
 ```bash
 # Проверка SSL сертификата
-openssl s_client -connect app.prompt-engineer.su:443 -servername app.prompt-engineer.su
+openssl s_client -connect app.your-domain.com:443 -servername app.your-domain.com
 
 # Проверка сертификата
-echo | openssl s_client -servername app.prompt-engineer.su \
-  -connect app.prompt-engineer.su:443 2>/dev/null | \
+echo | openssl s_client -servername app.your-domain.com \
+  -connect app.your-domain.com:443 2>/dev/null | \
   openssl x509 -noout -dates
 ```
 

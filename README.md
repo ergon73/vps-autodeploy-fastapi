@@ -146,9 +146,9 @@ make bp
 ### Makefile настройки
 
 ```makefile
-REGISTRY_HOST = registry.prompt-engineer.su
-REGISTRY_USER = admin
-REGISTRY_PASSWORD = admin123
+REGISTRY_HOST = registry.your-domain.com
+REGISTRY_USER = your-username
+REGISTRY_PASSWORD = your-password
 IMAGE_NAME = fastapi-test-app
 APP_VERSION = 1.0.0
 ```
@@ -199,7 +199,7 @@ make bump-patch
 
 **Проверить версии в Registry:**
 ```bash
-curl -k -u admin:admin123 https://registry.prompt-engineer.su/v2/fastapi-test-app/tags/list
+curl -k -u your-username:your-password https://registry.your-domain.com/v2/fastapi-test-app/tags/list
 ```
 
 **Результат:**
@@ -267,7 +267,7 @@ make check-deploy
 
 ```bash
 # Проверить доступность Registry
-curl -k https://registry.prompt-engineer.su/v2/
+curl -k https://registry.your-domain.com/v2/
 
 # Проверить учетные данные
 make login
@@ -319,22 +319,22 @@ ssh vps-prompt "docker logs traefik"
 
 ### 🔗 Полезные ссылки:
 
-- **Приложение:** https://app.prompt-engineer.su
-- **Registry:** https://registry.prompt-engineer.su/v2/_catalog
-- **Swagger UI:** https://app.prompt-engineer.su/docs
-- **ReDoc:** https://app.prompt-engineer.su/redoc
+- **Приложение:** https://app.your-domain.com
+- **Registry:** https://registry.your-domain.com/v2/_catalog
+- **Swagger UI:** https://app.your-domain.com/docs
+- **ReDoc:** https://app.your-domain.com/redoc
 
 ## 🏗️ Архитектура системы
 
 ```
 Internet
     │
-    ├─ DNS Records (registry.prompt-engineer.su → 95.163.232.237)
-    │                           (app.prompt-engineer.su → 95.163.232.237)
+    ├─ DNS Records (registry.your-domain.com → YOUR_SERVER_IP)
+    │                           (app.your-domain.com → YOUR_SERVER_IP)
     │
     ▼
 ┌─────────────────────────────────────────────────────────┐
-│              VPS: 95.163.232.237                        │
+│              VPS: YOUR_SERVER_IP                        │
 │                                                          │
 │  ┌──────────────────────────────────────────────┐      │
 │  │  Traefik (Reverse Proxy)                     │      │

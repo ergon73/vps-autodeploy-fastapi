@@ -2,8 +2,8 @@
 
 ## 📋 Обзор проекта
 
-**Домен:** prompt-engineer.su  
-**IP VPS:** 95.163.232.237  
+**Домен:** your-domain.com  
+**IP VPS:** YOUR_SERVER_IP  
 **Дата реализации:** 26 октября 2025  
 **Email:** georgy.belyanin@gmail.com
 
@@ -102,22 +102,22 @@ Docker Compose version v2.40.2
 #### 3.1 DNS записи
 ```
 Тип: A
-Имя: registry.prompt-engineer.su
-Значение: 95.163.232.237
+Имя: registry.your-domain.com
+Значение: YOUR_SERVER_IP
 TTL: 300
 
 Тип: A
-Имя: app.prompt-engineer.su
-Значение: 95.163.232.237
+Имя: app.your-domain.com
+Значение: YOUR_SERVER_IP
 TTL: 300
 ```
 
 #### 3.2 Проверка DNS
 ```bash
-nslookup registry.prompt-engineer.su
-nslookup app.prompt-engineer.su
+nslookup registry.your-domain.com
+nslookup app.your-domain.com
 
-# Ожидаемый результат: 95.163.232.237
+# Ожидаемый результат: YOUR_SERVER_IP
 ```
 
 ---
@@ -132,8 +132,8 @@ apt install -y certbot
 #### 4.2 Получение сертификатов
 ```bash
 certbot certonly --standalone \
-  -d registry.prompt-engineer.su \
-  -d app.prompt-engineer.su \
+  -d registry.your-domain.com \
+  -d app.your-domain.com \
   --non-interactive \
   --agree-tos \
   --email georgy.belyanin@gmail.com \
@@ -142,8 +142,8 @@ certbot certonly --standalone \
 
 **Результат:**
 ```
-Certificate is saved at: /etc/letsencrypt/live/registry.prompt-engineer.su/fullchain.pem
-Key is saved at: /etc/letsencrypt/live/registry.prompt-engineer.su/privkey.pem
+Certificate is saved at: /etc/letsencrypt/live/registry.your-domain.com/fullchain.pem
+Key is saved at: /etc/letsencrypt/live/registry.your-domain.com/privkey.pem
 This certificate expires on 2026-01-24.
 ```
 
@@ -208,12 +208,12 @@ certbot certificates
 3. Добавить сервис в docker-compose.yml:
 ```yaml
 new-app:
-  image: registry.prompt-engineer.su/new-app:latest
+  image: registry.your-domain.com/new-app:latest
   networks:
     - traefik-network
   labels:
     - "traefik.enable=true"
-    - "traefik.http.routers.newapp.rule=Host(`newapp.prompt-engineer.su`)"
+    - "traefik.http.routers.newapp.rule=Host(`newapp.your-domain.com`)"
     - "traefik.http.routers.newapp.entrypoints=websecure"
     - "traefik.http.routers.newapp.tls=true"
     - "traefik.http.routers.newapp.tls.certresolver=letsencrypt"
@@ -223,8 +223,8 @@ new-app:
 ### Добавление новой DNS записи
 ```
 Тип: A
-Имя: newapp.prompt-engineer.su
-Значение: 95.163.232.237
+Имя: newapp.your-domain.com
+Значение: YOUR_SERVER_IP
 ```
 
 ---
