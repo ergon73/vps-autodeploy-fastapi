@@ -1,11 +1,126 @@
-# FastAPI Test Application
+<div align="center">
 
-**Версия:** 1.0.1  
-**Статус:** Production Ready ✅
+# 🚀 FastAPI Auto-Deploy VPS
 
-Production-ready FastAPI приложение с автоматическим деплоем на VPS через Docker Registry и Let's Encrypt SSL.
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Production](https://img.shields.io/badge/Status-Production%20Ready-success)](https://github.com/ergon73/vps-autodeploy-fastapi)
 
-## ⚠️ ВАЖНО: Настройка безопасности
+**Production-ready FastAPI приложение с автоматическим деплоем на VPS**
+
+[Особенности](#-особенности) • [Быстрый старт](#-быстрый-старт) • [Документация](#-документация) • [Архитектура](#-архитектура)
+
+</div>
+
+---
+
+## 🎯 О проекте
+
+Полноценное решение для автоматического развертывания FastAPI приложения на VPS с нулевым временем простоя (zero-downtime deployment). Проект демонстрирует современные DevOps практики и production-ready инфраструктуру.
+
+### 💡 Почему этот проект?
+
+- ⚡ **Zero-downtime deployment** — обновления без остановки сервиса
+- 🔒 **Автоматический HTTPS** — Let's Encrypt сертификаты из коробки
+- 🐳 **Полная контейнеризация** — Docker + Docker Registry
+- 🔄 **Auto-update** — Watchtower следит за новыми версиями
+- 📦 **Версионирование** — поддержка множественных версий образов
+- 🛡️ **Security-first** — best practices безопасности
+
+## ✨ Особенности
+
+### 🏗️ Технологический стек
+
+| Компонент | Технология | Назначение |
+|-----------|------------|------------|
+| **Backend** | FastAPI 0.104+ | Современный async веб-фреймворк |
+| **Контейнеризация** | Docker | Изоляция и портируемость |
+| **Reverse Proxy** | Traefik 2.10 | Автоматический HTTPS и маршрутизация |
+| **SSL** | Let's Encrypt | Бесплатные SSL сертификаты |
+| **Registry** | Docker Registry | Приватное хранилище образов |
+| **Auto-update** | Watchtower | Автоматическое обновление контейнеров |
+| **CI/CD** | Makefile | Автоматизация деплоя |
+
+### 🎨 Ключевые возможности
+
+- 🚀 **Одна команда для деплоя** — `make bp` и всё готово
+- 📊 **REST API** — готовые endpoints с документацией
+- 📝 **Auto-documentation** — Swagger UI + ReDoc из коробки
+- 🔍 **Health checks** — мониторинг состояния приложения
+- 🔄 **Rolling updates** — обновления без простоя
+- 🏷️ **Semantic versioning** — управление версиями
+- 🌐 **Multi-domain** — поддержка нескольких доменов
+
+---
+
+## ⚡ Быстрый старт
+
+### Локальный запуск (за 30 секунд)
+
+```bash
+# Клонировать репозиторий
+git clone https://github.com/ergon73/vps-autodeploy-fastapi.git
+cd vps-autodeploy-fastapi
+
+# Установить зависимости
+pip install -r requirements.txt
+
+# Запустить приложение
+python main.py
+```
+
+Откройте http://localhost:8000 — приложение работает! 🎉
+
+### Docker запуск
+
+```bash
+# Собрать и запустить
+docker build -t fastapi-app .
+docker run -p 8000:8000 fastapi-app
+```
+
+### Production деплой на VPS
+
+```bash
+# 1. Настроить окружение
+cp env.example .env
+nano .env  # укажите свои данные
+
+# 2. Задеплоить одной командой
+make bp  # build + push
+
+# 3. Watchtower автоматически обновит приложение на сервере (~30 сек)
+```
+
+---
+
+## 📸 Демонстрация
+
+### API Endpoints
+
+```bash
+# Главная страница
+curl https://app.your-domain.com/
+
+# Информация о приложении
+curl https://app.your-domain.com/info
+
+# Версия
+curl https://app.your-domain.com/version
+
+# Health check
+curl https://app.your-domain.com/health
+```
+
+### Swagger UI Documentation
+
+![Swagger UI](https://via.placeholder.com/800x400/009688/FFFFFF?text=Swagger+UI+%7C+/docs)
+
+> 📝 **Замените на реальный скриншот:** Откройте `/docs` и сделайте screenshot
+
+---
 
 **Перед использованием замените все шаблонные значения на свои реальные данные!**
 
@@ -43,133 +158,134 @@ Production-ready FastAPI приложение с автоматическим д
 
 ---
 
-- **FastAPI** - современный веб-фреймворк для Python
-- **Docker** - контейнеризация приложения
-- **Let's Encrypt** - автоматические SSL-сертификаты
-- **Traefik** - реверс-прокси с автоматическим HTTPS
-- **Watchtower** - автоматическое обновление контейнеров
-- **Docker Registry** - приватное хранилище образов
-- **Docker Hub** - публичное хранилище образов
-- **Множественные версии** - демонстрация версионирования
-- **Автодеплой** - обновление без простоя
-- **Двойная публикация** - Registry + Docker Hub
+## 📚 Документация
 
-## 📁 Структура проекта
+| Документ | Описание |
+|----------|----------|
+| **[ARCHITECTURE.md](ARCHITECTURE.md)** | 🏗️ Детальная архитектура и схема инфраструктуры |
+| **[DEPLOYMENT.md](DEPLOYMENT.md)** | 🚀 Пошаговые инструкции по развертыванию |
+| **[OPERATIONS.md](OPERATIONS.md)** | ⚙️ Команды управления и troubleshooting |
+| **[DOCKER-HUB.md](DOCKER-HUB.md)** | 🐳 Интеграция с Docker Hub |
+
+---
+
+## 🏗️ Архитектура
 
 ```
-fastapi-test-app/
-├── main.py              # FastAPI приложение
-├── requirements.txt     # Python зависимости
-├── Dockerfile          # Конфигурация Docker
-├── .dockerignore       # Исключения для Docker
-├── Makefile           # Автоматизация деплоя
-└── README.md          # Документация
+┌─────────────────────────────────────────────────────────┐
+│                    Internet                              │
+│   ┌──────────────────────────────────────────────┐      │
+│   │  DNS: app.your-domain.com                    │      │
+│   │       registry.your-domain.com               │      │
+│   └───────────────────┬──────────────────────────┘      │
+│                       │                                  │
+│                       ▼                                  │
+│   ┌──────────────────────────────────────────────┐      │
+│   │         VPS Server (Ubuntu 22.04)            │      │
+│   │                                               │      │
+│   │  ┌─────────────────────────────────────┐    │      │
+│   │  │   Traefik (Reverse Proxy)           │    │      │
+│   │  │   • Automatic HTTPS                  │    │      │
+│   │  │   • Let's Encrypt                    │    │      │
+│   │  └────────┬──────────────┬──────────────┘    │      │
+│   │           │              │                    │      │
+│   │           ▼              ▼                    │      │
+│   │  ┌──────────────┐  ┌──────────────┐         │      │
+│   │  │ FastAPI App  │  │   Registry   │         │      │
+│   │  │ :8000        │  │ :5000        │         │      │
+│   │  └──────┬───────┘  └──────────────┘         │      │
+│   │         │                                     │      │
+│   │         ▼                                     │      │
+│   │  ┌──────────────────────────────┐           │      │
+│   │  │   Watchtower                 │           │      │
+│   │  │   • Auto-update containers   │           │      │
+│   │  │   • Pull new images          │           │      │
+│   │  └──────────────────────────────┘           │      │
+│   │                                               │      │
+│   │  Docker Network: traefik-network             │      │
+│   └───────────────────────────────────────────────┘     │
+└─────────────────────────────────────────────────────────┘
 ```
 
-## 🛠 Установка и запуск
-
-### Локальный запуск
-
-```bash
-# Установка зависимостей
-pip install -r requirements.txt
-
-# Запуск приложения
-python main.py
-```
-
-Приложение будет доступно по адресу: http://localhost:8000
-
-### Docker (локально)
-
-```bash
-# Сборка образа
-docker build -t fastapi-test-app .
-
-# Запуск контейнера
-docker run -p 8000:8000 fastapi-test-app
-```
-
-## 🚀 Деплой на VPS
-
-### Предварительные требования
-
-- Docker установлен локально
-- VPS с настроенной инфраструктурой:
-  - Traefik (реверс-прокси)
-  - Docker Registry
-  - Watchtower (автообновление)
-  - Let's Encrypt сертификаты
-
-### Команды деплоя
-
-```bash
-# Показать справку
-make help
-
-# Авторизация в Registry
-make login
-
-# Сборка образа
-make build
-
-# Отправка в Registry
-make push
-
-# Сборка и отправка (основная команда)
-make bp
-```
-
-### Автоматическое обновление
-
-После выполнения `make bp`:
-1. Образ отправляется в Registry
-2. Watchtower обнаруживает новый образ (~30 сек)
-3. Контейнер автоматически перезапускается
-4. Приложение обновляется без простоя
+---
 
 ## 📊 API Endpoints
 
-- `GET /` - Главная страница
-- `GET /health` - Проверка здоровья
-- `GET /info` - Информация о приложении
-- `GET /current-date` - Текущая дата и время
-- `GET /version` - Версия приложения (обновлено в v1.0.1)
-- `GET /changelog` - История изменений (новый в v1.0.1)
-- `GET /docs` - Swagger UI документация
-- `GET /redoc` - ReDoc документация
+| Endpoint | Метод | Описание |
+|----------|-------|----------|
+| `/` | GET | Главная страница с информацией о приложении |
+| `/health` | GET | Health check для мониторинга |
+| `/info` | GET | Детальная информация о системе |
+| `/version` | GET | Текущая версия приложения |
+| `/changelog` | GET | История изменений |
+| `/current-date` | GET | Текущая дата и время сервера |
+| `/docs` | GET | Swagger UI документация |
+| `/redoc` | GET | ReDoc документация |
 
-## 🔧 Конфигурация
+---
 
-### Переменные окружения
+## ⚠️ Настройка безопасности
 
-- `ENVIRONMENT` - окружение (по умолчанию: production)
+**Перед использованием замените все шаблонные значения на свои реальные данные!**
 
-### Makefile настройки
+### 🔐 Настройка окружения
 
-```makefile
-REGISTRY_HOST = registry.your-domain.com
-REGISTRY_USER = your-username
-REGISTRY_PASSWORD = your-password
-IMAGE_NAME = fastapi-test-app
-APP_VERSION = 1.0.0
-```
+1. **Скопируйте файл с шаблонными настройками:**
+   ```bash
+   cp env.example .env
+   ```
 
-## 🐳 Docker команды
+2. **Отредактируйте .env файл с вашими данными:**
+   ```bash
+   nano .env
+   ```
+
+3. **Обновите Makefile:**
+   ```makefile
+   # Configuration (ЗАМЕНИТЕ НА СВОИ ДАННЫЕ!)
+   REGISTRY_HOST = registry.your-domain.com
+   REGISTRY_USER = your-username  
+   REGISTRY_PASSWORD = your-password
+   IMAGE_NAME = fastapi-test-app
+   APP_VERSION = 1.0.1
+   ```
+
+4. **Настройте DNS записи:**
+   - `app.your-domain.com` → IP вашего сервера
+   - `registry.your-domain.com` → IP вашего сервера
+
+### 🚫 Что НЕ коммитить в Git:
+- Реальные пароли и токены
+- Файлы `.env` с реальными данными
+- SSL сертификаты и ключи
+- Конфигурационные файлы с секретами
+
+---
+
+## 🔧 Makefile команды
 
 ```bash
-# Сборка
-docker build -t fastapi-test-app .
+# Основные команды
+make help           # Показать все доступные команды
+make build          # Собрать Docker образ
+make push           # Отправить образ в Registry
+make bp             # Build + Push (основная команда для деплоя)
 
-# Запуск
-docker run -p 8000:8000 fastapi-test-app
+# Управление версиями
+make bump-patch     # Увеличить patch версию (1.0.0 → 1.0.1)
+make bump-minor     # Увеличить minor версию (1.0.0 → 1.1.0)
+make bump-major     # Увеличить major версию (1.0.0 → 2.0.0)
 
-# Логи
-docker logs fastapi-test-app
+# Локальная разработка
+make run            # Запустить локально
+make stop           # Остановить локальный контейнер
+make logs           # Показать логи
 
-# Shell в контейнере
-docker exec -it fastapi-test-app /bin/bash
+# Проверка
+make check-deploy   # Проверить статус деплоя
 ```
+
+---
 
 ## 📝 Разработка
 
@@ -181,91 +297,73 @@ async def new_endpoint():
     return {"message": "New endpoint"}
 ```
 
-### Обновление версии
+### Workflow разработки
 
 ```bash
-# Автоматическое увеличение patch версии
+# 1. Внести изменения в код
+nano main.py
+
+# 2. Увеличить версию
 make bump-patch
 
-# Или вручную изменить APP_VERSION в Makefile
-# Например: APP_VERSION = 1.0.2
+# 3. Задеплоить
+make bp
+
+# 4. Подождать ~30 секунд (Watchtower обновит автоматически)
+
+# 5. Проверить
+curl https://app.your-domain.com/version
 ```
 
-### Демонстрация множественных версий
+---
 
-Проект демонстрирует работу с несколькими версиями в Registry:
-
-1. **Версия 1.0.0** - базовая версия
-2. **Версия 1.0.1** - с новыми endpoints (`/changelog`)
-3. **latest** - всегда указывает на последнюю версию
-
-**Проверить версии в Registry:**
-```bash
-curl -k -u your-username:your-password https://registry.your-domain.com/v2/fastapi-test-app/tags/list
-```
-
-**Результат:**
-```json
-{
-  "name": "fastapi-test-app",
-  "tags": ["1.0.1", "latest", "1.0.0"]
-}
-```
-
-### Тестирование изменений
+## 🔍 Мониторинг и логи
 
 ```bash
-# Локальный запуск
-make run
+# Проверить версии в Registry
+curl -k -u your-username:your-password \
+  https://registry.your-domain.com/v2/fastapi-test-app/tags/list
 
-# Проверка
-curl http://localhost:8000/health
-
-# Остановка
-make stop
-```
-
-## 🔍 Мониторинг
-
-### Локальные логи
-
-```bash
+# Локальные логи
 make logs
-```
 
-### Логи на сервере
+# Логи на сервере
+ssh your-server "docker logs -f fastapi-app"
 
-```bash
-# Через SSH
-ssh vps-prompt "cd /root/autodeploy && docker logs -f fastapi-app"
-
-# Или через Makefile
-make watch-logs
-```
-
-### Проверка статуса
-
-```bash
+# Проверить статус
 make check-deploy
 ```
 
-## 🛡 Безопасность
+---
 
-- HTTPS через Let's Encrypt
-- Непривилегированный пользователь в контейнере
-- Security headers через Traefik
-- Firewall на VPS
+## 🛡️ Безопасность
 
-## 📚 Полезные ссылки
+| Компонент | Реализация |
+|-----------|------------|
+| **HTTPS** | Let's Encrypt автоматические сертификаты |
+| **TLS** | 1.2+ only, современные cipher suites |
+| **Headers** | Security headers через Traefik |
+| **Container** | Непривилегированный пользователь |
+| **Firewall** | UFW, только порты 22, 80, 443 |
+| **Secrets** | .env файлы не в Git |
+| **Registry** | HTTP Basic Auth |
 
-- [FastAPI Documentation](https://fastapi.tiangolo.com/)
-- [Docker Documentation](https://docs.docker.com/)
-- [Traefik Documentation](https://doc.traefik.io/traefik/)
-- [Let's Encrypt](https://letsencrypt.org/)
+---
+
+## ⚡ Производительность
+
+- **Response time:** ~50-200ms
+- **Container restart:** ~2-3 секунды
+- **Deployment time:** ~30 секунд
+- **Downtime:** 0 секунд (zero-downtime)
+- **SSL handshake:** ~100ms
+
+---
 
 ## 🆘 Troubleshooting
 
-### Проблема: Не удается авторизоваться в Registry
+<details>
+<summary><b>Проблема: Не удается авторизоваться в Registry</b></summary>
 
 ```bash
 # Проверить доступность Registry
@@ -274,159 +372,105 @@ curl -k https://registry.your-domain.com/v2/
 # Проверить учетные данные
 make login
 ```
+</details>
 
-### Проблема: Образ не обновляется
+<details>
+<summary><b>Проблема: Образ не обновляется</b></summary>
 
 ```bash
 # Проверить логи Watchtower
-ssh vps-prompt "docker logs watchtower -f"
+docker logs watchtower -f
 
 # Принудительное обновление
-ssh vps-prompt "cd /root/autodeploy && docker compose pull fastapi-app && docker compose up -d fastapi-app"
+docker compose pull && docker compose up -d
 ```
+</details>
 
-### Проблема: Приложение недоступно
+<details>
+<summary><b>Проблема: Приложение недоступно</b></summary>
 
 ```bash
 # Проверить статус контейнеров
-ssh vps-prompt "docker ps"
+docker ps
+
+# Проверить логи приложения
+docker logs fastapi-app
 
 # Проверить логи Traefik
-ssh vps-prompt "docker logs traefik"
+docker logs traefik
 ```
-
-## 🎯 Демонстрация возможностей
-
-### ✅ Что продемонстрировано:
-
-1. **Полный цикл разработки:**
-   - Создание FastAPI приложения
-   - Контейнеризация с Docker
-   - Автоматический деплой на VPS
-
-2. **Production-ready инфраструктура:**
-   - SSL сертификаты от Let's Encrypt
-   - Реверс-прокси с Traefik
-   - Автоматическое обновление с Watchtower
-
-3. **Версионирование:**
-   - Множественные версии в Registry
-   - Автоматическое обновление без простоя
-   - Откат к предыдущим версиям
-
-4. **Мониторинг:**
-   - Health checks
-   - Логирование
-   - Статус сервисов
-
-### 🔗 Полезные ссылки:
-
-- **Приложение:** https://app.your-domain.com
-- **Registry:** https://registry.your-domain.com/v2/_catalog
-- **Docker Hub:** https://hub.docker.com/r/your-username/fastapi-test-app
-- **Swagger UI:** https://app.your-domain.com/docs
-- **ReDoc:** https://app.your-domain.com/redoc
-
-## 🐳 Docker Hub интеграция
-
-Проект поддерживает публикацию образов в Docker Hub для публичного доступа:
-
-### Быстрая публикация в Docker Hub:
-
-```bash
-# Локальная публикация
-make hub-push
-
-# Или через скрипт на сервере
-ssh your-server
-/root/dockerhub-manager.sh deploy
-```
-
-### Преимущества Docker Hub:
-- 🌍 **Публичный доступ** - любой может скачать образ
-- 🔄 **Автоматические сборки** - интеграция с GitHub
-- 📊 **Статистика скачиваний** - мониторинг использования
-- 🏷️ **Тегирование версий** - управление релизами
-
-### Репозиторий:
-- **Docker Hub:** https://hub.docker.com/r/your-username/fastapi-test-app
-- **Локальный Registry:** https://registry.your-domain.com/v2/_catalog
+</details>
 
 ---
 
-```
-Internet
-    │
-    ├─ DNS Records (registry.your-domain.com → YOUR_SERVER_IP)
-    │                           (app.your-domain.com → YOUR_SERVER_IP)
-    │
-    ▼
-┌─────────────────────────────────────────────────────────┐
-│              VPS: YOUR_SERVER_IP                        │
-│                                                          │
-│  ┌──────────────────────────────────────────────┐      │
-│  │  Traefik (Reverse Proxy)                     │      │
-│  │  • Автоматический HTTPS                      │      │
-│  │  • HTTP → HTTPS редирект                     │      │
-│  │  • Let's Encrypt сертификаты                 │      │
-│  └───────────┬────────────┬──────────────────────┘      │
-│              │            │                              │
-│              ▼            ▼                              │
-│  ┌──────────────────┐  ┌──────────────────┐            │
-│  │ Docker Registry   │  │ FastAPI App      │            │
-│  │ registry.         │  │ app.             │            │
-│  │ prompt-engineer    │  │ prompt-engineer  │            │
-│  │ .su                │  │ .su              │            │
-│  └─────────▲────────┘  └────────▲─────────┘            │
-│            │                     │                      │
-│            │       ┌─────────────┴────────┐            │
-│            │       │   Watchtower         │            │
-│            └───────┤  • Мониторинг образов│            │
-│                    │  • Автообновление    │            │
-│                    │  • Cleanup старых    │            │
-│                    └──────────────────────┘            │
-│                                                          │
-│  Docker Network: traefik-network                        │
-└──────────────────────────────────────────────────────────┘
-```
+## 🎯 Что демонстрирует проект
 
-## ⚡ Производительность системы
+✅ **DevOps практики:**
+- Полный CI/CD пайплайн
+- Infrastructure as Code
+- Zero-downtime deployment
+- Версионирование образов
 
-- **SSL handshake:** ~100ms
-- **Response time:** ~50-200ms
-- **Container restart:** ~2-3 секунды
-- **Time-to-production:** ~30 секунд
-- **Downtime:** 0 секунд (zero-downtime)
+✅ **Production-ready решение:**
+- Автоматический HTTPS
+- Мониторинг и логирование
+- Health checks
+- Безопасность
 
-## 🔒 Безопасность
+✅ **Современный стек:**
+- FastAPI (async Python)
+- Docker ecosystem
+- Reverse proxy (Traefik)
+- Автоматизация (Makefile)
 
-- **HTTPS:** 100% трафика через Let's Encrypt
-- **Authentication:** Registry защищен паролем
-- **Firewall:** UFW с минимальными портами (22, 80, 443)
-- **Security headers:** Включены через Traefik
-- **TLS:** 1.2+ только
-- **Auto-restart:** Да (unless-stopped)
+---
 
-## 📚 Дополнительная документация
+## 📜 Changelog
 
-- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Детальная архитектура и настройка инфраструктуры
-- **[OPERATIONS.md](OPERATIONS.md)** - Команды управления, мониторинг и troubleshooting
-- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Инструкции по деплою
-
-## 📝 Changelog
-
-### v1.0.1 (2025-10-26)
+### v1.0.1 (2024-10-26)
 - ✅ Добавлен endpoint `/changelog`
 - ✅ Обновлена информация о версии
 - ✅ Демонстрация множественных версий в Registry
 - ✅ Улучшена документация
 
-### v1.0.0 (2025-10-25)
+### v1.0.0 (2024-10-25)
 - ✅ Первоначальный релиз
 - ✅ Базовые endpoints
 - ✅ Docker контейнеризация
 - ✅ Автодеплой на VPS
 
+---
+
+## 🤝 Контрибьюция
+
+Проект открыт для улучшений! Если вы нашли баг или хотите добавить функционал:
+
+1. Fork проекта
+2. Создайте feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit изменений (`git commit -m 'Add amazing feature'`)
+4. Push в branch (`git push origin feature/amazing-feature`)
+5. Откройте Pull Request
+
+---
+
+## 📬 Контакты
+
+**Георгий Белянин**
+- GitHub: [@ergon73](https://github.com/ergon73)
+- Telegram: [@Ergon73](https://t.me/Ergon73)
+
+---
+
 ## 📄 Лицензия
 
-MIT License
+MIT License - смотрите [LICENSE](LICENSE) для деталей
+
+---
+
+<div align="center">
+
+**Сделано с ❤️ для демонстрации современных DevOps практик**
+
+⭐ Поставьте звезду, если проект был полезен!
+
+</div>
