@@ -116,9 +116,7 @@ curl https://app.your-domain.com/health
 
 ### Swagger UI Documentation
 
-![Swagger UI](https://via.placeholder.com/800x400/009688/FFFFFF?text=Swagger+UI+%7C+/docs)
-
-> 📝 **Замените на реальный скриншот:** Откройте `/docs` и сделайте screenshot
+Откройте `/docs` для интерактивной API документации с возможностью тестирования endpoints.
 
 ---
 
